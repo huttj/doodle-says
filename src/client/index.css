@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+:root {
+  --bg-color: #a9e0fc;
+}
+
+@keyframes move-bg {
+  0%,
+  to {
+    background-position: 0 0;
+  }
+  25% {
+    background-position: 100%0;
+  }
+  50% {
+    background-position: 100%100%;
+  }
+  75% {
+    background-position: 0 100%;
+  }
+}
+
+body {
+  transform: perspective(0);
+}
+
+body {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: 0/200vmax 200vmax;
+  background-image: radial-gradient(at 46% 35%, #82affe 0, #ffffff00 50%),
+    radial-gradient(at 80% 20%, #faa9c5 0, #ffffff00 50%),
+    radial-gradient(at 0% 100%, #ffe995 0, #ffffff00 50%),
+    radial-gradient(at 70% 71%, #95ee90 0, #ffffff00 50%),
+    radial-gradient(at 10% 10%, #7be0d8 0, #ffffff00 50%);
+  animation: 30s ease-in-out infinite move-bg;
+}
+
+body,
+html {
+ overflow: visible;
+ min-height: 100vh;
+}
