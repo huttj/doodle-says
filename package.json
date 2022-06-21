@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node src/server/server.js",
     "dev": "vite ./src/client --config=vite.config.js",
-    "build": "vite build ./src/client",
+    "build": "vite build ./src/client  --config=vite.config.js --outDir=../../dist",
     "preview": "vite preview ./src/client"
   },
   "dependencies": {
