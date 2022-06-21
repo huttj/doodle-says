@@ -118,7 +118,7 @@ app
         throw new Error('Sorry, the form timed out. Please go back and try again.');
       }
 
-      const { id, message } = req.body;
+      const { id, message, walletAddress } = req.body;
 
       if (airtable.messageExists(id)) {
         throw new Error(`Message already recorded for #${id}`);
@@ -126,9 +126,7 @@ app
 
       const asset = await opensea.fetchAssetsFromCollection(DOODLES_CONTRACT_ADDRESS, id);
 
-      console.log('Got asset');
-
-      const result = await airtable.writeMessage(id, message, asset.image_url);
+      const result = await airtable.writeMessage(id, message, asset.image_url, walletAddress);
 
       res.send(result);
 

@@ -22,7 +22,7 @@ async function getMessages(force=false) {
 }
 
 
-async function writeMessage(id, message, imageUrl) {
+async function writeMessage(id, message, imageUrl, walletAddress) {
   console.log(id, message, imageUrl);
   const { data } = await axios({
     method: 'POST',
@@ -36,6 +36,7 @@ async function writeMessage(id, message, imageUrl) {
           id: ''+id,
           message,
           imageUrl,
+          walletAddress,
         },
       }],
     },
