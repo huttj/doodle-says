@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node src/server/server.js",
     "dev": "vite ./src/client --config=vite.config.js",
-    "build": "vite build ./src/client  --config=vite.config.js --outDir=../../dist",
+    "copy-lib": "cp ./src/client/qrcode.js ./dist/qrcode.js && cp ./src/client/textFit.js ./dist/textFit.js",
+    "build": "vite build ./src/client  --config=vite.config.js --outDir=../../dist && npm run copy-lib",
     "preview": "vite preview ./src/client"
   },
   "dependencies": {

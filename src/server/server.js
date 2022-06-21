@@ -8,7 +8,7 @@ const socketio = require("socket.io");
 const events = require('../socketEvents.json');
 const cors = require('cors');
 const { default: axios } = require('axios');
-
+const path = require('path');
 
 const MASTER_KEY = process.env.MASTER_KEY;
 const DOODLES_CONTRACT_ADDRESS = '0x8a90cab2b38dba80c64b7734e58ee1db38b8992e';
@@ -82,7 +82,7 @@ io.on('connection', socket => {
 app
   .use(cors())
   .use(express.json())
-  .use('/', express.static('./src/client', {
+  .use('/', express.static(`./dist`, {
     setHeaders: (res, path, stat) => {
       if (path.includes('.jsx')) {
         res.setHeader('content-type', 'text/javascript');
@@ -149,7 +149,7 @@ app
   })
   .use((req, res, next) => {
     //Capture All 404 errors
-    res.sendFile(`${__dirname}/../client/index.html`);
+    res.sendFile(path.resolve(`${__dirname}/../../dist/index.html`));
   })
 
 // TODO: Webhook for server deletion
