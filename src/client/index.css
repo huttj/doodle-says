@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'Chalkboard';
+  src: url('Chalkboard-Bold.woff') format('woff'), url('Chalkboard-Bold.woff2') format('woff2');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Chalkboard';
+  src: url('Chalkboard.woff') format('woff'), url('Chalkboard.woff2') format('woff2');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
