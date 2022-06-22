@@ -188,7 +188,7 @@ const Message = styled('div')`
       &:first-of-type {
         flex: 0;
         font-weight: 700;
-        font-size: 32px;
+        font-size: 36px;
         /* line-height: 71px; */
       }
       
