@@ -9,8 +9,8 @@ export default function Code(props) {
   useEffect(() => {
     if (ref.current && !code.current) {
       code.current = new QRCode(ref.current, {
-        height: 128,
-        width: 128,
+        height: 150,
+        width: 150,
         text: '',
         colorDark: "#FFFFFF",
         colorLight: "rgba(0,0,0,0)",
