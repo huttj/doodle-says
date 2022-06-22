@@ -140,7 +140,7 @@ export default function Form() {
           <label>
             what's your ETH NFT wallet address?
             <p>Optional, for a special surprise.</p>
-            <input placeholder="0x... or vitalik.eth" />
+            <input placeholder="0x... or vitalik.eth" value={data.walletAddress} onChange={e => setData({ ...data, walletAddress: e.target.value })} />
           </label>
 
           <button type="submit">Send to screen</button>
@@ -254,9 +254,9 @@ const Wrapper = styled('div')`
       font-size: 32px;
 
       a {
-      text-decoration-style: dotted;
-      color: black !important;
-    }
+        text-decoration-style: dotted;
+        color: black !important;
+      }
 
       span {
         /* font-weight: normal; */
