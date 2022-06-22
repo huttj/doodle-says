@@ -101,31 +101,16 @@ html {
 }
 
 .twisting {
-  transition: font-weight 0.4s ease-in;
   animation: floating-secondary 2.5s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
-section span:nth-child(1) {
-  animation-delay: 1s;
-}
-section span:nth-child(2) {
-  animation-delay: 2s;
-}
-section span:nth-child(3) {
-  animation-delay: 3s;
-}
-section span:nth-child(4) {
-  animation-delay: 4s;
-}
-section span:nth-child(5) {
-  animation-delay: 5s;
-}
-section span:nth-child(6) {
-  animation-delay: 6s;
-}
-section span:nth-child(7) {
-  animation-delay: 7s;
-}
+
+
+.twisting.n1, .tilting.n1 { animation-delay: -.5s; animation-duration: 3s; }
+.twisting.n2, .tilting.n2 { animation-delay: -1s; animation-duration: 3s; }
+.twisting.n3, .tilting.n3 { animation-delay: -1.5s; animation-duration: 3s; }
+.twisting.n4, .tilting.n4 { animation-delay: -2s; animation-duration: 3s; }
+.twisting.n5, .tilting.n5 { animation-delay: -2.5s; animation-duration: 3s; }
 
 section span:hover {
   font-weight: 100;
@@ -148,7 +133,7 @@ section span:hover {
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(0, 1vh);
+    transform: translate(0, 10vh);
   }
   100% {
     transform: translate(0, 0);
@@ -157,12 +142,12 @@ section span:hover {
 
 @keyframes tilting {
   0% {
-    transform: rotate(1deg);
+    transform: rotate(2deg);
   }
   50% {
-    transform: rotate(-1deg);
+    transform: rotate(-2deg);
   }
   100% {
-    transform: rotate(1deg);
+    transform: rotate(2deg);
   }
 }

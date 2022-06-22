@@ -34,6 +34,21 @@ function App() {
         maxFontSize: 100,
         reprocess: true,
       });
+
+      setTimeout(() => {
+        const span = messageRef.current.children[0];
+        const children = span.textContent.split(' ').map((word, i) => {
+          const el = document.createElement('span');
+          el.textContent = word + ' ';
+          el.style.display = 'inline-block';
+          el.style.marginRight = '24px';
+          el.classList.add('tilting');
+          el.classList.add(`n${(i%5) + 1}`);
+          return el;
+        });
+        span.textContent = '';
+        children.forEach(c => span.appendChild(c));
+      }, 1);
     }
   }, [messageRef.current, item]);
 
@@ -62,10 +77,14 @@ function App() {
   return (
     <Wrapper>
       <Message>
-        <Image  className="floating tilting offset-2" image={item.imageUrl} />
+        <div   className="floating  offset-5" >
+          <Image  className=" tilting offset-2" image={item.imageUrl} />
+        </div>
         <div className="text">
-          <p className="floating tilting">what makes Doodle #{item.id} happy?</p>
-          <p className="floating tilting offset-3" ref={messageRef}>{item.message}</p>
+          <p className="floating offset-4">
+            <span className='tilting'>what makes Doodle #{item.id} happy?</span>
+          </p>
+          <p className="floating offset-2" ref={messageRef}>{item.message}</p>
         </div>
       </Message>
       <Footer>
@@ -174,6 +193,12 @@ const Wrapper = styled('div')`
   .offset-4 {
     animation-delay: -4s;
   }
+  .offset-5 {
+    animation-delay: -5s;
+  }
+  .offset-6 {
+    animation-delay: -6s;
+  }
 `;
 
 const Message = styled('div')`
@@ -210,6 +235,7 @@ const Message = styled('div')`
         flex: 0;
         font-weight: 700;
         font-size: 36px;
+        margin-bottom: 32px;
         /* line-height: 71px; */
       }
       
