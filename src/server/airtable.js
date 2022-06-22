@@ -6,7 +6,7 @@ const { AIRTABLE_KEY, AIRTABLE_TABLE_ID } = process.env;
 let messages = [];
 
 async function getMessages(force=false) {
-  if (force || (messages && messages.length)) {
+  if (!force && (messages && messages.length)) {
     return messages;
   }
 
