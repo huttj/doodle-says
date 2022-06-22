@@ -55,10 +55,11 @@ setInterval(updateAuthKey, AUTH_KEY_EXPIRY_MS);
 
 // Manual poll every minute
 const REFRESH_INTERVAL_MS = 1000 * 60 * 60;
-setInterval(async () => {
+setInterval(reloadList, REFRESH_INTERVAL_MS);
+async function reloadList() {
   const list = await airtable.getMessages(true);
   notifyAllSockets(events.LIST_REFRESH, list);
-}, REFRESH_INTERVAL_MS);
+}
 
 
 
@@ -95,6 +96,18 @@ app
   .get('/auth', (req, res) => {
     if (req.query.key === MASTER_KEY) {
       res.send(currentAuthKey);
+    }
+    throw new Error('Unauthorized');
+  })
+
+  .get('/reload', async (req, res, next) => {
+    try {
+      if (req.query.key === MASTER_KEY) {
+        reloadList();
+        res.send('Reloaded');
+      }
+    } catch (e) {
+      return next(e)
     }
     throw new Error('Unauthorized');
   })
@@ -137,7 +150,7 @@ app
     }
   })
   .get('/image/:id', async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     const asset = await opensea.fetchAssetsFromCollection(DOODLES_CONTRACT_ADDRESS, id);
     const stream = await axios({
       method: 'GET',
