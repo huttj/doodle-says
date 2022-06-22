@@ -8,8 +8,6 @@ import getQuery from './getQuery';
 import useMessages from './useMessages';
 import socket, { useKey } from './socket';
 
-
-
 const textFit = window['textFit'];
 
 
@@ -64,10 +62,10 @@ function App() {
   return (
     <Wrapper>
       <Message>
-        <Image  className="floating tilting offset-3" image={item.imageUrl} />
+        <Image  className="floating tilting offset-2" image={item.imageUrl} />
         <div className="text">
-          <p className="floating tilting offset-1">what makes Doodle #{item.id} happy?</p>
-          <p className="floating tilting offset-2" ref={messageRef}>{item.message}</p>
+          <p className="floating tilting">what makes Doodle #{item.id} happy?</p>
+          <p className="floating tilting offset-3" ref={messageRef}>{item.message}</p>
         </div>
       </Message>
       <Footer>
@@ -162,19 +160,19 @@ const Wrapper = styled('div')`
   height: 100vh;
 
   .offset-1 {
-    animation-delay: 1s;
+    animation-delay: -1s;
   }
   
   .offset-2 {
-    animation-delay: 2s;
+    animation-delay: -2s;
   }
 
   .offset-3 {
-    animation-delay: 3s;
+    animation-delay: -3s;
   }
 
   .offset-4 {
-    animation-delay: 3s;
+    animation-delay: -4s;
   }
 `;
 

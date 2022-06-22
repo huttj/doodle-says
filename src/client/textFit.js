@@ -151,27 +151,13 @@
     low = settings.minFontSize;
     high = settings.maxFontSize;
 
-    console.log({
-      originalWidth,
-      originalHeight,
-
-    });
-
+    
     // Binary search for highest best fit
     var size = low;
     while (low <= high) {
       mid = (high + low) >> 1;
       innerSpan.style.fontSize = mid + 'px';
       var innerSpanBoundingClientRect = innerSpan.getBoundingClientRect();
-
-      console.log({
-        size,
-        'innerSpanBoundingClientRect.height': innerSpanBoundingClientRect.height,
-        'innerSpanBoundingClientRect.width': innerSpanBoundingClientRect.width,
-        originalHeight,
-        originalWidth,
-        mid,
-      })
 
       if (
         innerSpanBoundingClientRect.width <= originalWidth 
