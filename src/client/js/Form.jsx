@@ -6,12 +6,24 @@ import carlImage from '../carl.jpg';
 import { SERVER_URL } from "./config";
 
 
+const key = getQuery().key || '';
+
 export default function Form() {
 
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    if (key) {
+      // Hide key
+      window.history.replaceState(null, null, window.location.origin + window.location.pathname)
+    } else {
+      setError(true);
+    }
+  }, []);
+
+  
   const [data, setData] = useState({
     id: '',
     message: '',
@@ -51,10 +63,14 @@ export default function Form() {
       return alert('Your message is too long!');
     }
 
+    if (!key) {
+      throw new Error('Missing key');
+    }
+
     try {
       await axios({
         method: 'POST',
-        url: `${SERVER_URL}/list?key=${getQuery().key}`,
+        url: `${SERVER_URL}/list?key=${key}`,
         data,
       });
       setSubmitted(true);
@@ -105,7 +121,7 @@ export default function Form() {
         </div>
       </div>
       <div className="inner">
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className={loading ? 'loading' : ''}>
           <label>
             what's your Doodle's ID?
             <div className="row">
@@ -115,7 +131,7 @@ export default function Form() {
           </label>
 
           <label>
-            what's makes your Dood happy?
+            what makes your Dood happy?
             <p>This will be public. Keep it PG.</p>
             <textarea placeholder="Type here" rows="3" value={data.message} onChange={e => setData({ ...data, message: e.target.value })} />
             <span className={`limit ${data.message.length > 280 ? 'is-over' : ''}`}>{data.message.length}/280</span>
@@ -216,6 +232,11 @@ const Wrapper = styled('div')`
   left: 0;
   right: 0;
   background-color: #A9E0FC;
+
+  .loading {
+    pointer-events: none;
+  }
+
 
   .header {
     padding: 16px;

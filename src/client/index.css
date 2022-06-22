@@ -66,3 +66,24 @@ html {
  overflow: visible;
  min-height: 100vh;
 }
+
+
+@keyframes loadingShimmer {
+  0% {
+    opacity: 0.333;
+  }
+  50% {
+    opacity: 0.667; 
+  }
+  100% {
+    opacity: 0.333; 
+  }
+}
+
+.loading {
+  animation-duration: 1s;
+  animation-fill-mode: forwards; 
+  animation-iteration-count: infinite;
+  animation-name: loadingShimmer;
+  animation-timing-function: linear;
+}
