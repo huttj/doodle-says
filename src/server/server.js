@@ -54,7 +54,7 @@ setInterval(updateAuthKey, AUTH_KEY_EXPIRY_MS);
 
 
 // Manual poll every minute
-const REFRESH_INTERVAL_MS = 1000 * 60 * 60;
+const REFRESH_INTERVAL_MS = 1000 * 60;
 setInterval(reloadList, REFRESH_INTERVAL_MS);
 async function reloadList() {
   const list = await airtable.getMessages(true);
