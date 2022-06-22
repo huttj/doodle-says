@@ -42,8 +42,8 @@ async function notifyAllSockets(event, payload, authenticatedOnly = false) {
 
 
 
-// Cycle temporary auth keys every five minutes
-const AUTH_KEY_EXPIRY_MS = 1000 * 60 * 5; // Five minutes
+// Cycle temporary auth keys every X minutes
+const AUTH_KEY_EXPIRY_MS = 1000 * 60 * 20;
 let currentAuthKey = null;
 async function updateAuthKey() {
   currentAuthKey = '' + Math.abs((Math.random() * 10e10) | 0);
