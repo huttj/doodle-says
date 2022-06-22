@@ -53,12 +53,13 @@ body {
   height: 100%;
   position: absolute;
   background: 0/200vmax 200vmax;
-  background-image: radial-gradient(at 46% 35%, #82affe 0, #ffffff00 50%),
-    radial-gradient(at 80% 20%, #faa9c5 0, #ffffff00 50%),
-    radial-gradient(at 0% 100%, #ffe995 0, #ffffff00 50%),
-    radial-gradient(at 70% 71%, #95ee90 0, #ffffff00 50%),
-    radial-gradient(at 10% 10%, #7be0d8 0, #ffffff00 50%);
-  animation: 30s ease-in-out infinite move-bg;
+  background-image:
+    radial-gradient(at 46% 35%, hsl(218, 98%, 60%) 0, #ffffff00 50%),
+    radial-gradient(at 80% 20%, hsl(339, 100%, 65%) 0, #ffffff00 50%),
+    radial-gradient(at 0% 100%, hsl(48, 100%, 60%) 0, #ffffff00 50%),
+    radial-gradient(at 70% 71%, hsl(117, 59%, 43%) 0, #ffffff00 50%),
+    radial-gradient(at 10% 10%, hsl(175, 62%, 40%) 0, #ffffff00 50%);
+  animation: 20s ease-in-out infinite move-bg;
 }
 
 body,

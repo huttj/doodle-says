@@ -33,7 +33,7 @@ function App() {
 
       textFit(messageRef.current, {
         multiLine: true,
-        maxFontSize: 200,
+        maxFontSize: 150,
         reprocess: true,
       });
     }
@@ -65,7 +65,7 @@ function App() {
       <Message>
         <Image image={item.imageUrl} />
         <div className='text'>
-          <p>What makes Doodle #{item.id} happy?</p>
+          <p>what makes Doodle #{item.id} happy?</p>
           <p ref={messageRef}>{item.message}</p>
         </div>
       </Message>
@@ -103,7 +103,7 @@ const Footer = styled('div')`
     margin: 24px;
 
     &.attribution {
-      text-shadow: 1px 1px rgba(0,0,0,.25);
+      text-shadow: 1px 1px rgba(0,0,0,.33);
     }
 
     img {
@@ -135,13 +135,13 @@ const Footer = styled('div')`
 
 const Image = styled('div')`
   border-radius: 10000px;
-  border: 16px solid white;
-  margin-right: 72px;
-  flex: 0 0 33vw;
-  width: 33vw;
-  height: 33vw;
-  max-width: 33vw;
-  max-height: 33vw;
+  border: 12px solid white;
+  margin-right: 4%;
+  flex: 0 0 50vh;
+  width: 50vh;
+  height: 50vh;
+  max-width: 50vh;
+  max-height: 50vh;
   background: url(${p => p.image}) center center;
   background-size: cover;
 `;
@@ -158,18 +158,18 @@ const Message = styled('div')`
   padding: 5%;
   padding-top: 0;
   display: flex;
+  margin-bottom: 128px;
 
   img {
     border-radius: 10000px;
     border: 16px solid white;
-    margin-right: 128px;
+    margin-right: 96px;
 
   }
 
   .text {
     display: flex;
     flex-direction: column;
-    margin-left: 32px;
 
     p {
 
@@ -177,19 +177,21 @@ const Message = styled('div')`
       font-family: 'Chalkboard';
       color: #FFFFFF;
       -webkit-text-stroke: 1px #897EE3;
-      text-shadow: 1px 2px 0px #897ee3, 2px 5px 0px rgb(0 0 0 / 15%);
-      font-size: 100px;
+      text-shadow: .02em .06em 0 #897ee3, .04em .1em 0 rgb(0 0 0 / 15%);
+      font-size: 80px;
       margin: 0;
-
+      
       &:first-of-type {
         flex: 0;
         font-weight: 700;
-        font-size: calc(12px + 3vw);
+        font-size: calc(15px + 2vw);
         /* line-height: 71px; */
       }
-
+      
       &:last-of-type {
-        margin-top: 32px;
+        -webkit-text-stroke: transparent;
+        margin-top: 64px;
+        line-height: 1.1;
       }
     }
   }

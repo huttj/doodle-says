@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import getQuery from "./getQuery";
-import carlImage from '../carl.jpg';
+import carlImage from '../carl.gif';
 import { SERVER_URL } from "./config";
 
 
@@ -117,7 +117,7 @@ export default function Form() {
     <Wrapper>
       <div className="header">
         <div className="inner">
-          <h1>Happy Doods <span>by <a>Carl</a></span></h1>
+          <h1>Happy Doods <span>by <a href="https://twitter.com/carlthedoodle">Carl</a></span></h1>
         </div>
       </div>
       <div className="inner">
@@ -253,6 +253,10 @@ const Wrapper = styled('div')`
       text-shadow: 0 2px 0px black;
       font-size: 32px;
 
+      a {
+      text-decoration-style: dotted;
+      color: black !important;
+    }
 
       span {
         /* font-weight: normal; */
