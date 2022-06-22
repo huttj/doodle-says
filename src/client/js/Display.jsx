@@ -52,7 +52,7 @@ function App() {
           <p className='attribution'>by <img src={twitterSvg} /> @CarlTheDoodle</p>
           {authKey && <div>
             <a href={`/post?key=${authKey}`}>
-              <Code text={`/post?key=${authKey}`} />
+            <Code text={`${window.location.origin}/post?key=${authKey}`} />
             </a>
           </div>}
         </Footer>
@@ -73,7 +73,7 @@ function App() {
         <p className='attribution'>by <img src={twitterSvg} /> @CarlTheDoodle</p>
         {authKey && <div>
           <a href={`/post?key=${authKey}`}>
-            <Code text={`/post?key=${authKey}`} />
+            <Code text={`${window.location.origin}/post?key=${authKey}`} />
           </a>
 
         </div>}
