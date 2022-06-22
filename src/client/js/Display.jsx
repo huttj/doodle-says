@@ -25,7 +25,7 @@ function App() {
     if (messageRef.current && item) {
       console.log('text fitting')
 
-      const { width, height } = innerSize(messageRef.current);
+      const { width, height } = innerSize(messageRef.current.parentElement);
 
       messageRef.current.style.height = height + 'px';
       messageRef.current.style.width = width + 'px';
@@ -33,7 +33,7 @@ function App() {
 
       textFit(messageRef.current, {
         multiLine: true,
-        maxFontSize: 150,
+        maxFontSize: 100,
         reprocess: true,
       });
     }
@@ -64,7 +64,7 @@ function App() {
     <Wrapper>
       <Message>
         <Image image={item.imageUrl} />
-        <div className='text'>
+        <div className="text">
           <p>what makes Doodle #{item.id} happy?</p>
           <p ref={messageRef}>{item.message}</p>
         </div>
@@ -136,7 +136,8 @@ const Footer = styled('div')`
 const Image = styled('div')`
   border-radius: 10000px;
   border: 12px solid white;
-  margin-right: 4%;
+  margin-right: 48px;
+  margin-left: 48px;
   flex: 0 0 50vh;
   width: 50vh;
   height: 50vh;
@@ -155,7 +156,7 @@ const Wrapper = styled('div')`
 `;
 
 const Message = styled('div')`
-  padding: 5%;
+  margin: 0 ;
   padding-top: 0;
   display: flex;
   margin-bottom: 128px;
@@ -168,6 +169,9 @@ const Message = styled('div')`
   }
 
   .text {
+    flex: 1;
+    margin-right: 48px;
+    min-width: 50vw;
     display: flex;
     flex-direction: column;
 
@@ -184,13 +188,13 @@ const Message = styled('div')`
       &:first-of-type {
         flex: 0;
         font-weight: 700;
-        font-size: calc(15px + 2vw);
+        font-size: 32px;
         /* line-height: 71px; */
       }
       
       &:last-of-type {
         -webkit-text-stroke: transparent;
-        margin-top: 64px;
+        margin-top: 32px;
         line-height: 1.1;
       }
     }
