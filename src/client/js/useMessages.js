@@ -27,7 +27,7 @@ io.on(events.LIST_REFRESH, list => {
   randomize();
 });
 
-const SWAP_INTERVAL_MS = 1000 * 30;
+const SWAP_INTERVAL_MS = 1000 * 10;
 
 function randomize() {
   setMessages(list => [...list.sort(() => Math.random() - .5)]);
