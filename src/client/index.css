@@ -100,7 +100,7 @@ html {
   animation: tilting 10s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
-section span {
+.twisting {
   transition: font-weight 0.4s ease-in;
   animation: floating-secondary 2.5s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }

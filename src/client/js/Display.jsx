@@ -49,11 +49,12 @@ function App() {
 
         </Message>
         <Footer>
-          <p className='attribution'>by <img src={twitterSvg} /> @CarlTheDoodle</p>
+          <p className='attribution floating tilting'>by <img src={twitterSvg} /> @CarlTheDoodle</p>
           {authKey && <div>
             <a href={`/post?key=${authKey}`}>
-            <Code text={`${window.location.origin}/post?key=${authKey}`} />
+              <Code text={`${window.location.origin}/post?key=${authKey}`} />
             </a>
+            <p className="you-happy">what makes your Doodle happy?</p>
           </div>}
         </Footer>
       </Wrapper>
@@ -63,19 +64,19 @@ function App() {
   return (
     <Wrapper>
       <Message>
-        <Image image={item.imageUrl} />
+        <Image  className="floating tilting offset-3" image={item.imageUrl} />
         <div className="text">
-          <p>what makes Doodle #{item.id} happy?</p>
-          <p ref={messageRef}>{item.message}</p>
+          <p className="floating tilting offset-1">what makes Doodle #{item.id} happy?</p>
+          <p className="floating tilting offset-2" ref={messageRef}>{item.message}</p>
         </div>
       </Message>
       <Footer>
-        <p className='attribution'>by <img src={twitterSvg} /> @CarlTheDoodle</p>
+        <p className='attribution floating tilting offset-4'>by <img src={twitterSvg} /> @CarlTheDoodle</p>
         {authKey && <div>
           <a href={`/post?key=${authKey}`}>
             <Code text={`${window.location.origin}/post?key=${authKey}`} />
           </a>
-
+          <p className="you-happy">what makes your Doodle happy?</p>
         </div>}
       </Footer>
     </Wrapper>
@@ -131,6 +132,12 @@ const Footer = styled('div')`
       line-height: 36px;
     }
   }
+
+  .you-happy {
+    font-size: 26px;
+    line-height: 1.15;
+    margin-left: 16px;
+  }
 `;
 
 const Image = styled('div')`
@@ -153,6 +160,22 @@ const Wrapper = styled('div')`
   justify-content: space-around;
   align-items: center;
   height: 100vh;
+
+  .offset-1 {
+    animation-delay: 1s;
+  }
+  
+  .offset-2 {
+    animation-delay: 2s;
+  }
+
+  .offset-3 {
+    animation-delay: 3s;
+  }
+
+  .offset-4 {
+    animation-delay: 3s;
+  }
 `;
 
 const Message = styled('div')`
