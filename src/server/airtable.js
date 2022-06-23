@@ -17,7 +17,10 @@ async function getMessages(force = false) {
       authorization: `Bearer ${AIRTABLE_KEY}`,
     },
   });
+  
   messages = data.records.map(r => ({ ...r.fields, airtableId: r.id }));
+  messages.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
   return messages;
 }
 

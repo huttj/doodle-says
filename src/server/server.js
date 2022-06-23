@@ -162,6 +162,7 @@ app
       const asset = await opensea.fetchAssetsFromCollection(DOODLES_CONTRACT_ADDRESS, id);
 
       const result = await airtable.writeMessage({ id, message, imageUrl: asset.image_url, walletAddress, airtableId: existing.airtableId }, index);
+      index--;
 
       res.send(result);
 
