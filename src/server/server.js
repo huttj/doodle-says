@@ -64,8 +64,8 @@ async function reloadList() {
 
 const DISPLAY_TIMEOUT_MS = 1000 * 10;
 let index = 0;
+let nextTimeout = null;
 async function getNext() {
-  index++;
   const messages = await airtable.getMessages();
 
   // I don't know what happens when it hits Infinity, and I don't want to find out
@@ -78,9 +78,18 @@ async function getNext() {
   console.log('Next message', index, message.message);
 
   notifyAllSockets(events.CURRENT_MESSAGE, message);
-  setTimeout(getNext, DISPLAY_TIMEOUT_MS);
+
+  index++;
+
+  nextTimeout = setTimeout(getNext, DISPLAY_TIMEOUT_MS);
 }
 getNext();
+
+function play(message) {
+  clearTimeout(nextTimeout);
+  notifyAllSockets(events.CURRENT_MESSAGE, message);
+  nextTimeout = setTimeout(getNext, DISPLAY_TIMEOUT_MS);
+}
 
 
 io.on('connection', socket => {
@@ -162,7 +171,8 @@ app
       const asset = await opensea.fetchAssetsFromCollection(DOODLES_CONTRACT_ADDRESS, id);
 
       const result = await airtable.writeMessage({ id, message, imageUrl: asset.image_url, walletAddress, airtableId: existing.airtableId }, index);
-      index--;
+
+      play(result);
 
       res.send(result);
 

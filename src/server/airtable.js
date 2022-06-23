@@ -57,7 +57,7 @@ async function writeMessage({ id, message, imageUrl, walletAddress, airtableId }
   const response = data.records.map(r => ({ ...r.fields, airtableId: r.id }))[0];
 
   if (!airtableId) {
-    messages.splice(index, 0, response);
+    messages.push(response);
   } else {
     const oldIndex = messages.findIndex(n => n.id == id);
     messages[oldIndex] = response;
