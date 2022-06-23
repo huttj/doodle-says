@@ -24,9 +24,11 @@ async function getMessages(force = false) {
 
 async function writeMessage({ id, message, imageUrl, walletAddress, airtableId }, index = messages.length) {
 
+  index = index % messages.length;
+
   console.log({
-    id, message, imageUrl, walletAddress, airtableId
-  })
+    id, message, imageUrl, walletAddress, airtableId, index,
+  });
 
   const method = airtableId ? 'PATCH' : 'POST';
 

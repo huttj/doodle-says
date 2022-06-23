@@ -74,6 +74,9 @@ async function getNext() {
   }
 
   const message = messages[index % messages.length];
+
+  console.log('Next message', index, message.message);
+
   notifyAllSockets(events.CURRENT_MESSAGE, message);
   setTimeout(getNext, DISPLAY_TIMEOUT_MS);
 }
@@ -158,7 +161,7 @@ app
 
       const asset = await opensea.fetchAssetsFromCollection(DOODLES_CONTRACT_ADDRESS, id);
 
-      const result = await airtable.writeMessage({ id, message, imageUrl: asset.image_url, walletAddress, airtableId: existing.airtableId }, index + 1);
+      const result = await airtable.writeMessage({ id, message, imageUrl: asset.image_url, walletAddress, airtableId: existing.airtableId }, index);
 
       res.send(result);
 
