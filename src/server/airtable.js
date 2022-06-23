@@ -43,7 +43,7 @@ async function writeMessage({ id, message, imageUrl, walletAddress }, index=mess
   });
 
   const response = data.records.map(r => r.fields)[0];
-  messages.splice(index, response);
+  messages.splice(index, 0, response);
 
   return response;
 }
