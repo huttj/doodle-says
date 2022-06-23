@@ -51,7 +51,7 @@ async function updateAuthKey() {
 }
 updateAuthKey();
 setInterval(updateAuthKey, AUTH_KEY_EXPIRY_MS);
- 
+
 
 
 // Manual poll every minute
@@ -67,6 +67,12 @@ let index = 0;
 async function getNext() {
   index++;
   const messages = await airtable.getMessages();
+
+  // I don't know what happens when it hits Infinity, and I don't want to find out
+  if (index > 10e9) {
+    index = index % messages.length;
+  }
+
   const message = messages[index % messages.length];
   notifyAllSockets(events.CURRENT_MESSAGE, message);
   setTimeout(getNext, DISPLAY_TIMEOUT_MS);
@@ -154,7 +160,7 @@ app
 
       const asset = await opensea.fetchAssetsFromCollection(DOODLES_CONTRACT_ADDRESS, id);
 
-      const result = await airtable.writeMessage({ id, message, imageUrl: asset.image_url, walletAddress }, index+1);
+      const result = await airtable.writeMessage({ id, message, imageUrl: asset.image_url, walletAddress }, index + 1);
 
       res.send(result);
 
