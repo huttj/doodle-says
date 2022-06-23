@@ -154,13 +154,11 @@ app
 
       const { id, message, walletAddress } = req.body;
 
-      if (airtable.messageExists(id)) {
-        throw new Error(`Message already recorded for #${id}`);
-      }
+      const existing = airtable.getExisting(id) || {};
 
       const asset = await opensea.fetchAssetsFromCollection(DOODLES_CONTRACT_ADDRESS, id);
 
-      const result = await airtable.writeMessage({ id, message, imageUrl: asset.image_url, walletAddress }, index + 1);
+      const result = await airtable.writeMessage({ id, message, imageUrl: asset.image_url, walletAddress, airtableId: existing.airtableId }, index + 1);
 
       res.send(result);
 

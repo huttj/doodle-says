@@ -17,21 +17,28 @@ async function getMessages(force = false) {
       authorization: `Bearer ${AIRTABLE_KEY}`,
     },
   });
-  messages = data.records.map(r => r.fields);
+  messages = data.records.map(r => ({ ...r.fields, airtableId: r.id }));
   return messages;
 }
 
 
-async function writeMessage({ id, message, imageUrl, walletAddress }, index=messages.length) {
-  console.log(id, message, imageUrl);
+async function writeMessage({ id, message, imageUrl, walletAddress, airtableId }, index = messages.length) {
+
+  console.log({
+    id, message, imageUrl, walletAddress, airtableId
+  })
+
+  const method = airtableId ? 'PATCH' : 'POST';
+
   const { data } = await axios({
-    method: 'POST',
+    method,
     url: `https://api.airtable.com/v0/${AIRTABLE_TABLE_ID}/Messages`,
     headers: {
       authorization: `Bearer ${AIRTABLE_KEY}`,
     },
     data: {
       records: [{
+        id: airtableId,
         fields: {
           id: '' + id,
           message,
@@ -42,13 +49,19 @@ async function writeMessage({ id, message, imageUrl, walletAddress }, index=mess
     },
   });
 
-  const response = data.records.map(r => r.fields)[0];
-  messages.splice(index, 0, response);
+  const response = data.records.map(r => ({ ...r.fields, airtableId: r.id }))[0];
+
+  if (!airtableId) {
+    messages.splice(index, 0, response);
+  } else {
+    const oldIndex = messages.findIndex(n => n.id == id);
+    messages[oldIndex] = response;
+  }
 
   return response;
 }
 
-function messageExists(id) {
+function getExisting(id) {
   return messages.find(m => m.id === id);
 }
 
@@ -56,5 +69,5 @@ function messageExists(id) {
 module.exports = {
   getMessages,
   writeMessage,
-  messageExists,
+  getExisting,
 };
