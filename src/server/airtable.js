@@ -5,7 +5,7 @@ const { AIRTABLE_KEY, AIRTABLE_TABLE_ID } = process.env;
 // One server, so cache it all in memory
 let messages = [];
 
-async function getMessages(force=false) {
+async function getMessages(force = false) {
   if (!force && (messages && messages.length)) {
     return messages;
   }
@@ -22,7 +22,7 @@ async function getMessages(force=false) {
 }
 
 
-async function writeMessage(id, message, imageUrl, walletAddress) {
+async function writeMessage({ id, message, imageUrl, walletAddress }, index=messages.length) {
   console.log(id, message, imageUrl);
   const { data } = await axios({
     method: 'POST',
@@ -33,7 +33,7 @@ async function writeMessage(id, message, imageUrl, walletAddress) {
     data: {
       records: [{
         fields: {
-          id: ''+id,
+          id: '' + id,
           message,
           imageUrl,
           walletAddress,
@@ -43,7 +43,7 @@ async function writeMessage(id, message, imageUrl, walletAddress) {
   });
 
   const response = data.records.map(r => r.fields)[0];
-  messages.push(response);
+  messages.splice(index, response);
 
   return response;
 }

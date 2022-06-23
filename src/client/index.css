@@ -62,6 +62,12 @@ body {
   animation: 20s ease-in-out infinite move-bg;
 }
 
+/* radial-gradient(at 46% 35%, #9C4F96 0, #ffffff00 50%),
+    radial-gradient(at 80% 20%, #FF6355 0, #ffffff00 50%),
+    radial-gradient(at 0% 100%, #FAE442 0, #ffffff00 50%),
+    radial-gradient(at 70% 71%, #8BD448 0, #ffffff00 50%),
+    radial-gradient(at 10% 10%, #2AA8F2 0, #ffffff00 50%); */
+
 body,
 html {
  overflow: visible;

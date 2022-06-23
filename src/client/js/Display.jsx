@@ -5,7 +5,7 @@ import twitterSvg from '../twitter.svg';
 import Code from './Code';
 import axios from 'axios';
 import getQuery from './getQuery';
-import useMessages from './useMessages';
+import useMessage from './useMessages';
 import socket, { useKey } from './socket';
 
 const textFit = window['textFit'];
@@ -14,10 +14,10 @@ const textFit = window['textFit'];
 function App() {
 
   const messageRef = useRef(null);
-  const [messages] = useMessages();
+  const [message] = useMessage();
   const [authKey] = useKey();
 
-  const item = (messages || []).slice(-1)[0];
+  const item = message;
 
   useEffect(() => {
     if (messageRef.current && item) {
@@ -55,7 +55,7 @@ function App() {
 
 
 
-  if (!messages || !messages.length) {
+  if (!item) {
     return (
       <Wrapper>
         <Message>
@@ -82,7 +82,7 @@ function App() {
         </div>
         <div className="text">
           <p className="floating offset-4">
-            <span className='tilting'>what makes Doodle #{item.id} happy?</span>
+            <div className='tilting'>what makes Doodle #{item.id} happy?</div>
           </p>
           <p className="floating offset-2" ref={messageRef}>{item.message}</p>
         </div>

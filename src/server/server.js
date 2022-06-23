@@ -51,6 +51,7 @@ async function updateAuthKey() {
 }
 updateAuthKey();
 setInterval(updateAuthKey, AUTH_KEY_EXPIRY_MS);
+ 
 
 
 // Manual poll every minute
@@ -61,17 +62,31 @@ async function reloadList() {
   notifyAllSockets(events.LIST_REFRESH, list);
 }
 
+const DISPLAY_TIMEOUT_MS = 1000 * 10;
+let index = 0;
+async function getNext() {
+  index++;
+  const messages = await airtable.getMessages();
+  const message = messages[index % messages.length];
+  notifyAllSockets(events.CURRENT_MESSAGE, message);
+  setTimeout(getNext, DISPLAY_TIMEOUT_MS);
+}
+getNext();
 
 
 io.on('connection', socket => {
   console.log('New socket connection', socket.id);
 
+  airtable.getMessages().then(messages => {
+    if (messages) {
+      socket.emit(events.CURRENT_MESSAGE, messages[index]);
+    }
+  });
+
   socket.on(events.AUTHENTICATE, key => {
     socket.authenticated = !!(key === MASTER_KEY);
-    console.log('Authenticated', socket.authenticated, socket.id);
     socket.emit(events.AUTHENTICATE, socket.authenticated);
     if (socket.authenticated) {
-      console.log('currentAuthKey', currentAuthKey);
       socket.emit(events.KEY, currentAuthKey);
     }
   });
