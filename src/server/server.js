@@ -85,7 +85,7 @@ io.on('connection', socket => {
 
   airtable.getMessages().then(messages => {
     if (messages) {
-      socket.emit(events.CURRENT_MESSAGE, messages[index]);
+      socket.emit(events.CURRENT_MESSAGE, messages[index % messages.length]);
     }
   });
 
